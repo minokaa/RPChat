@@ -1,0 +1,15 @@
+name: RPChat
+version: '1.0'
+main: me.minokaa.rpchat.RPChat
+api-version: '1.21'
+commands:
+  me:
+    description: Выводит действие от вашего лица
+    usage: /<command> <action>
+  do:
+    description: Выводит действие/описание не от вашего лица, а от лица мира
+    usage: /<command> <action>
+  try:
+    description: Выводит действие которое может быть удачным или неудачным
+    usage: /<command> <action>
+

@@ -1,0 +1,5 @@
+me\minokaa\rpchat\chat\RpChat.class
+me\minokaa\rpchat\RPChat.class
+me\minokaa\rpchat\commands\MeCommand.class
+me\minokaa\rpchat\commands\TryCommand.class
+me\minokaa\rpchat\commands\DoCommand.class
