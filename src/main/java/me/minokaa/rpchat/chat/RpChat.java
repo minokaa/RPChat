@@ -18,7 +18,7 @@ public class RpChat implements Listener {
         String message = e.getMessage();
         Player playersAll[] = world.getPlayers().toArray(new Player[0]);
 
-        if (message.toCharArray()[0] == '!') {
+        if (message.toCharArray()[0] == '!' && message.length() != 1) {
             message = message.substring(1);
             for (Player i : playersAll) {
                 if (player.getLocation().distance(i.getLocation()) <= 60d) {
@@ -27,7 +27,7 @@ public class RpChat implements Listener {
 
                 }
             }
-        } else if (message.toCharArray()[0] == ',') {
+        } else if (message.toCharArray()[0] == ',' && message.length() != 1) {
             message = message.substring(1);
             for (Player i : playersAll) {
                 if (player.getLocation().distance(i.getLocation()) <= 3d) {
@@ -35,7 +35,7 @@ public class RpChat implements Listener {
                     System.out.println(namePlayer + " шепчет: " + message);
                 }
             }
-        } else if (message.toCharArray()[0] == '_') {
+        } else if (message.toCharArray()[0] == '_' && message.length() != 1) {
             message = message.substring(1);
             for (Player i : playersAll) {
                 if (player.getLocation().distance(i.getLocation()) <= 20d) {
