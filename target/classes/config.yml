@@ -1,0 +1,12 @@
+language: "RU" # or EN
+
+color-chat:
+  whisper: "&8"
+  scream: "&6"
+  default: "&7"
+  LOOC: "&b"
+
+color-commands:
+  me: "&6"
+  do: "&7"
+  try: "&6"

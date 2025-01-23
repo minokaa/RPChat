@@ -6,6 +6,7 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.Random;
@@ -29,22 +30,46 @@ public class TryCommand implements CommandExecutor {
         Random rand = new Random();
         int num = rand.nextInt(10);
         String action = String.join(" ", args);
+        FileConfiguration config = RPChat.getPlugin().getConfig();
+        String color = config.getString("color-commands.try");
+        String language = config.getString("language");
+
+        color = ChatColor.translateAlternateColorCodes('&', color);
+
 
         if (args.length == 0) {
             player.sendMessage(ChatColor.RED + "Введите действие");
             return true;
         }
-        if (command.getName().equalsIgnoreCase("try")) {
-            for (Player i : playersAll) {
-                if (num <= 3) {
-                    if (player.getLocation().distance(i.getLocation()) <= 20d) {
-                        i.sendMessage( ChatColor.GOLD + "* " + name + " " + action + " [" + ChatColor.GREEN + "Удачно" + ChatColor.GOLD + "]");
-                        System.out.println("* " + name + " " + action + "[Удачно]");
+        if (language.equals("RU")) {
+            if (command.getName().equalsIgnoreCase("try")) {
+                for (Player i : playersAll) {
+                    if (num <= 3) {
+                        if (player.getLocation().distance(i.getLocation()) <= 20d) {
+                            i.sendMessage(color + "* " + name + " " + action + " [" + ChatColor.GREEN + "Удачно" + color + "]");
+                            System.out.println("* " + name + " " + action + "[Удачно]");
+                        }
+                    } else if (num >= 4) {
+                        if (player.getLocation().distance(i.getLocation()) <= 20d) {
+                            i.sendMessage(color + "* " + name + " " + action + " [" + ChatColor.RED + "Неудачно" + color + "]");
+                            System.out.println("* " + name + " " + action + "[Неудачно]");
+                        }
                     }
-                } else if (num >=4 ) {
-                    if (player.getLocation().distance(i.getLocation()) <= 20d) {
-                        i.sendMessage( ChatColor.GOLD + "* " + name + " " + action + " [" + ChatColor.RED + "Неудачно" + ChatColor.GOLD + "]");
-                        System.out.println("* " + name + " " + action + "[Неудачно]");
+                }
+            }
+        } else if (language.equals("EN")) {
+            if (command.getName().equalsIgnoreCase("try")) {
+                for (Player i : playersAll) {
+                    if (num <= 3) {
+                        if (player.getLocation().distance(i.getLocation()) <= 20d) {
+                            i.sendMessage(color + "* " + name + " " + action + " [" + ChatColor.GREEN + "Success" + color + "]");
+                            System.out.println("* " + name + " " + action + "[Success]");
+                        }
+                    } else if (num >= 4) {
+                        if (player.getLocation().distance(i.getLocation()) <= 20d) {
+                            i.sendMessage(color + "* " + name + " " + action + " [" + ChatColor.RED + "Failure" + color + "]");
+                            System.out.println("* " + name + " " + action + "[Failure]");
+                        }
                     }
                 }
             }

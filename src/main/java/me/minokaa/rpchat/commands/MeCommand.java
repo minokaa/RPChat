@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -27,6 +28,10 @@ public class MeCommand implements CommandExecutor {
         World world = player.getWorld();
         Player[] playersAll = world.getPlayers().toArray(new Player[0]);
         String action = String.join(" ", args);
+        FileConfiguration config = RPChat.getPlugin().getConfig();
+        String color = config.getString("color-commands.me");
+
+        color = ChatColor.translateAlternateColorCodes('&', color);
 
         if (args.length == 0) {
             player.sendMessage(ChatColor.RED + "Введите действие");
@@ -36,7 +41,7 @@ public class MeCommand implements CommandExecutor {
         if (command.getName().equalsIgnoreCase("me")) {
             for (Player i : playersAll) {
                 if (player.getLocation().distance(i.getLocation()) <= 20d) {
-                    i.sendMessage(ChatColor.GOLD + "* " + name + " " + action);
+                    i.sendMessage(color + "* " + name + " " + action);
                     System.out.println("* " + name + " " + action);
                 }
             }
