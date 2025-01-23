@@ -30,19 +30,35 @@ public class MeCommand implements CommandExecutor {
         String action = String.join(" ", args);
         FileConfiguration config = RPChat.getPlugin().getConfig();
         String color = config.getString("color-commands.me");
+        String language = config.getString("language");
 
         color = ChatColor.translateAlternateColorCodes('&', color);
 
-        if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Введите действие");
-            return true;
-        }
+        if (language.equals("RU")) {
+            if (args.length == 0) {
+                player.sendMessage(ChatColor.RED + "Введите действие");
+                return true;
+            }
+            if (command.getName().equalsIgnoreCase("me")) {
+                for (Player i : playersAll) {
+                    if (player.getLocation().distance(i.getLocation()) <= 20d) {
+                        i.sendMessage(color + "* " + name + " " + action);
+                        System.out.println("* " + name + " " + action);
+                    }
+                }
+            }
+        } else if (language.equals("EN")) {
+            if (args.length == 0) {
+                player.sendMessage(ChatColor.RED + "Enter the action");
+                return true;
+            }
 
-        if (command.getName().equalsIgnoreCase("me")) {
-            for (Player i : playersAll) {
-                if (player.getLocation().distance(i.getLocation()) <= 20d) {
-                    i.sendMessage(color + "* " + name + " " + action);
-                    System.out.println("* " + name + " " + action);
+            if (command.getName().equalsIgnoreCase("me")) {
+                for (Player i : playersAll) {
+                    if (player.getLocation().distance(i.getLocation()) <= 20d) {
+                        i.sendMessage(color + "* " + name + " " + action);
+                        System.out.println("* " + name + " " + action);
+                    }
                 }
             }
         }

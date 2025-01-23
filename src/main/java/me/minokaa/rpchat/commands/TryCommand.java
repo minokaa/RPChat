@@ -37,11 +37,12 @@ public class TryCommand implements CommandExecutor {
         color = ChatColor.translateAlternateColorCodes('&', color);
 
 
-        if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Введите действие");
-            return true;
-        }
+
         if (language.equals("RU")) {
+            if (args.length == 0) {
+                player.sendMessage(ChatColor.RED + "Введите действие");
+                return true;
+            }
             if (command.getName().equalsIgnoreCase("try")) {
                 for (Player i : playersAll) {
                     if (num <= 3) {
@@ -58,6 +59,10 @@ public class TryCommand implements CommandExecutor {
                 }
             }
         } else if (language.equals("EN")) {
+            if (args.length == 0) {
+                player.sendMessage(ChatColor.RED + "Enter the action");
+                return true;
+            }
             if (command.getName().equalsIgnoreCase("try")) {
                 for (Player i : playersAll) {
                     if (num <= 3) {

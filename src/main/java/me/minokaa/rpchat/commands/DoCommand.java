@@ -27,19 +27,34 @@ public class DoCommand implements CommandExecutor {
         String action = String.join(" ", args);
         FileConfiguration config = RPChat.getPlugin().getConfig();
         String color = config.getString("color-commands.do");
+        String language = config.getString("language");
 
         color = ChatColor.translateAlternateColorCodes('&', color);
 
-        if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Введите действие");
-            return true;
-        }
-
-        if (command.getName().equalsIgnoreCase("do")) {
-            for (Player i : playersAll) {
-                if (player.getLocation().distance(i.getLocation()) <= 20d) {
-                    i.sendMessage(  color + action + " ((" + ChatColor.DARK_GRAY + name + color + "))");
-                    System.out.println(action + " ((" + name + "))");
+        if (language.equals("RU")) {
+            if (args.length == 0) {
+                player.sendMessage(ChatColor.RED + "Введите действие");
+                return true;
+            }
+            if (command.getName().equalsIgnoreCase("do")) {
+                for (Player i : playersAll) {
+                    if (player.getLocation().distance(i.getLocation()) <= 20d) {
+                        i.sendMessage(color + action + " ((" + ChatColor.DARK_GRAY + name + color + "))");
+                        System.out.println(action + " ((" + name + "))");
+                    }
+                }
+            }
+        } else if (language.equals("EN")) {
+            if (args.length == 0) {
+                player.sendMessage(ChatColor.RED + "Enter the action");
+                return true;
+            }
+            if (command.getName().equalsIgnoreCase("do")) {
+                for (Player i : playersAll) {
+                    if (player.getLocation().distance(i.getLocation()) <= 20d) {
+                        i.sendMessage(color + action + " ((" + ChatColor.DARK_GRAY + name + color + "))");
+                        System.out.println(action + " ((" + name + "))");
+                    }
                 }
             }
         }
